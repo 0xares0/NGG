@@ -7,31 +7,32 @@ def number_guessing_game():
     # Init the game
     if "game active" not in st.session_state:
         st.session_state.guesses = 0
-        st.session_state.game_active = "False"
+        st.session_state.game_active = False
         st.session_state.lives_left = 0
         st.session_state.max_lives = 0
     
     # Game start
-    if st.button("Game Start")
-        st.session_state.game_active = "True"
+    if st.button("Game Start"):
+        st.session_state.game_active = True
         st.session_state.lives_left = st.session_state.max_lives
         st.session_state.secret_number = random.randint(1, 500)
-        st.number_input("Guess the number")
+        guess = st.number_input("Guess the number")
     
     # Guessing the number
-    while st.session_state.lives_left > 0:
-        if st.number_input == st.session_state.secret_number:
-            st.write("Congratulations, you got the number")
-            st.session_state.guesses += 1
-        
-        elif st.number_input != st.session_state.secret_number:
-            st.write("Wrong number. Guess again")
-            st.session_state.guesses += 1
-            st.session_state.lives_left -= 1
-            st.write(f"You have {st.session_state.lives_left} lives left")
-    
-    st.error("Game Over. Try again")
-
+    if st.session_state.lives_left > 0:
+        if st.button("Submit Number"):
+            if guess == st.session_state.secret_number:
+                st.write("Congratulations, you got the number")
+                st.session_state.guesses += 1
+                st.session_state.game_active = False
+            
+            else:
+                st.write("Wrong number. Guess again")
+                st.session_state.guesses += 1
+                st.session_state.lives_left -= 1
+                st.write(f"You have {st.session_state.lives_left} lives left")
+    else:
+        st.error("Game Over. Try again")
     
 
 if __name__ == "__main__":
