@@ -29,6 +29,8 @@ def number_guessing_game():
     # Guessing the number
     if st.session_state.game_active and (st.session_state.lives_left > 0):
         if st.button("Submit Number"):
+            st.session_state.guess = int(user_guess)
+            
             if user_guess == st.session_state.secret_number:
                 st.write("Congratulations, you got the number")
                 st.session_state.guesses += 1
