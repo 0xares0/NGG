@@ -8,8 +8,8 @@ def number_guessing_game():
     if "game active" not in st.session_state:
         st.session_state.guesses = 0
         st.session_state.game_active = False
-        st.session_state.lives_left = 0
-        st.session_state.max_lives = 0
+        st.session_state.lives_left = 5
+        st.session_state.max_lives = 5
     
     # Game start
     if st.button("Game Start"):
@@ -20,7 +20,7 @@ def number_guessing_game():
     
     st.write(f"{st.session_state.max_lives}")
     st.write(f"{st.session_state.lives_left}")
-    
+
     guess = st.number_input("Guess the number")
     
     # Guessing the number
@@ -36,8 +36,12 @@ def number_guessing_game():
                 st.session_state.guesses += 1
                 st.session_state.lives_left -= 1
                 st.error(f"You have {st.session_state.lives_left} lives left")
-    else:
-        st.error("Game Over. Try again")
+                
+                if st.session_state.lives_left > 0:
+                    st.write("Wrong number. Guess again")
+                else:
+                    st.error(f"Game over. Try Again")
+                    st.session_state.game_active = False
     
 
 if __name__ == "__main__":
