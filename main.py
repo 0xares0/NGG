@@ -7,11 +7,10 @@ def number_guessing_game():
     # Init the game
     if "game active" not in st.session_state:
         st.session_state.guesses = 0
-        st.session_state.guesses = 0
         st.session_state.game_active = False
         st.session_state.lives_left = 0
         st.session_state.max_lives = 0
-        st.session_state.max_lives = 0
+        
     
     # Game start
     if st.button("Game Start"):
@@ -22,7 +21,7 @@ def number_guessing_game():
         st.session_state.guess = None
     
     st.write(f"{st.session_state.max_lives}")
-    st.write(f"{st.session_state.lives_left}")
+    st.write(f"{st.session_state.guesses} guesses")
     
     user_guess = st.session_state.guess = st.number_input("Guess the number")
     
