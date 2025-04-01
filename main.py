@@ -18,6 +18,9 @@ def number_guessing_game():
         st.session_state.lives_left = st.session_state.max_lives
         st.session_state.secret_number = random.randint(1, 500)
     
+    st.write(f"{st.session_state.max_lives}")
+    st.write(f"{st.session_state.lives_left}")
+    
     guess = st.number_input("Guess the number")
     
     # Guessing the number
@@ -32,7 +35,7 @@ def number_guessing_game():
                 st.write("Wrong number. Guess again")
                 st.session_state.guesses += 1
                 st.session_state.lives_left -= 1
-                st.write(f"You have {st.session_state.lives_left} lives left")
+                st.error(f"You have {st.session_state.lives_left} lives left")
     else:
         st.error("Game Over. Try again")
     
