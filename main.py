@@ -14,9 +14,11 @@ def number_guessing_game():
     # Game start
     if st.button("Game Start"):
         st.session_state.game_active = True
+        st.session_state.max_lives = 5
         st.session_state.lives_left = st.session_state.max_lives
         st.session_state.secret_number = random.randint(1, 500)
-        guess = st.number_input("Guess the number")
+    
+    guess = st.number_input("Guess the number")
     
     # Guessing the number
     if st.session_state.lives_left > 0:
@@ -36,7 +38,7 @@ def number_guessing_game():
     
 
 if __name__ == "__main__":
-    main()
+    number_guessing_game()
 
     
 
