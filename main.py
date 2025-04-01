@@ -7,8 +7,10 @@ def number_guessing_game():
     # Init the game
     if "game active" not in st.session_state:
         st.session_state.guesses = 0
+        st.session_state.guesses = 0
         st.session_state.game_active = False
         st.session_state.lives_left = 0
+        st.session_state.max_lives = 0
         st.session_state.max_lives = 0
     
     # Game start
