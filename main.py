@@ -32,13 +32,11 @@ def number_guessing_game():
                 st.session_state.game_active = False
             
             else:
-                st.write("Wrong number. Guess again")
                 st.session_state.guesses += 1
                 st.session_state.lives_left -= 1
-                st.error(f"You have {st.session_state.lives_left} lives left")
-                
+    
                 if st.session_state.lives_left > 0:
-                    st.write("Wrong number. Guess again")
+                    st.write(f"Wrong number. You have {st.session_state.lives_left}")
                 else:
                     st.error(f"Game over. Try Again")
                     st.session_state.game_active = False
