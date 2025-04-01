@@ -16,7 +16,7 @@ def number_guessing_game():
         st.session_state.game_active = True
         st.session_state.max_lives = 5
         st.session_state.lives_left = st.session_state.max_lives
-        st.session_state.secret_number = random.randint(1, 5)
+        st.session_state.secret_number = random.randint(1, 50)
         st.session_state.guesses = 0
     
     st.write(f"{st.session_state.max_lives}")
