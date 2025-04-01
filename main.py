@@ -14,7 +14,7 @@ def number_guessing_game():
         
     
     # Game start
-    if st.button("Game Start"):
+    if st.button("Game Start") and not st.session_state.game_active:
         st.session_state.game_active = True
         st.session_state.max_lives = 5
         st.session_state.lives_left = st.session_state.max_lives
@@ -24,14 +24,14 @@ def number_guessing_game():
     st.write(f"{st.session_state.max_lives}")
     st.write(f"{st.session_state.guesses} guesses")
     
-    user_guess = st.number_input("Guess the number between 1 amd 50")
+    user_guess = st.number_input("Guess the number between 1 and 50", step=1)
     
     # Guessing the number
     if st.session_state.game_active and (st.session_state.lives_left > 0):
         if st.button("Submit Number"):
             st.session_state.guess = int(user_guess)
             
-            if user_guess == st.session_state.secret_number:
+            if st.session_state.guess == st.session_state.secret_number:
                 st.write("Congratulations, you got the number")
                 st.session_state.guesses += 1
                 st.session_state.game_active = False
@@ -46,7 +46,7 @@ def number_guessing_game():
                     st.write(f"Wrong number. Guess again. Lives left: {st.session_state.lives_left}")
                     
                 else:
-                    st.error("Game Over. Try again")
+                    st.error(f"Game Over. Try again. The correct answer was {st.session_state.secret_number}")
                     st.session_state.game_active = False
     
 
