@@ -1,5 +1,5 @@
 import random
-import streamlit
+import streamlit as st
 
 def number_guessing_game():
     st.title("Number guessing game")
