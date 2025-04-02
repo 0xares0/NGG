@@ -40,10 +40,9 @@ def number_guessing_game():
                 
                 st.session_state.guesses += 1
                 st.session_state.lives_left -= 1
-                st.error(f"You have {st.session_state.lives_left} lives left")
-
+                
                 if st.session_state.lives_left > 0:
-                    st.write(f"Wrong number. Guess again. Lives left: {st.session_state.lives_left}")
+                    st.warning(f"Wrong number. Guess again. Lives left: {st.session_state.lives_left}")
                     
                 else:
                     st.error(f"Game Over. Try again. The correct answer was {st.session_state.secret_number}")
