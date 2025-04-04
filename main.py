@@ -26,25 +26,26 @@ def number_guessing_game():
     user_guess = st.number_input("Guess the number between 1 and 50", step=1)
     
     # Guessing the number
-    if st.session_state.game_active and st.session_state.lives_left > 0:
-        if st.button("Submit Number") and st.session_state.game_active:
-            st.session_state.guess = int(user_guess)
+    if st.button("Submit Number") and st.session_state.game_active and st.session_state.lives_left > 0:
+        st.session_state.guess = int(user_guess)
             
-            if st.session_state.guess == st.session_state.secret_number:
-                st.success("Congratulations, you got the number")
-                st.session_state.game_active = False
+        if st.session_state.guess == st.session_state.secret_number:
+            st.success("Congratulations, you got the number")
+            st.session_state.game_active = False
             
-            else:
+        else:
                 
-                st.session_state.guesses += 1
-                st.session_state.lives_left -= 1
-                
-                if st.session_state.lives_left > 0:
-                    st.warning(f"Wrong number. Guess again. Lives left: {st.session_state.lives_left}")
+            st.session_state.guesses += 1
+            st.session_state.lives_left -= 1
+            
+            if st.session_state.lives_left > 0:
+                st.warning(f"Wrong number. Guess again. Lives left: {st.session_state.lives_left}")
                     
-                else:
-                    st.error(f"Game Over. Try again. The correct answer was {st.session_state.secret_number}")
-                    st.session_state.game_active = False
+            else:
+                st.error(f"Game Over. Try again. The correct answer was {st.session_state.secret_number}")
+                st.session_state.game_active = False
+    else:
+        st.session_state.game_active = False
     
 
 if __name__ == "__main__":
