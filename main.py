@@ -5,7 +5,7 @@ def number_guessing_game():
     st.title("Number guessing game")
 
     # Init the game
-    if "game_active" not in st.session_state:
+    if "game active" not in st.session_state:
         st.session_state.guesses = 0
         st.session_state.game_active = False
         st.session_state.lives_left = 0
@@ -48,8 +48,6 @@ def number_guessing_game():
                     st.session_state.game_active = False
         else:
             st.warning("Please click on Game Start")
-    else:
-        st.session_state.game_active = False
     
 
 if __name__ == "__main__":
