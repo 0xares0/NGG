@@ -19,6 +19,10 @@ def number_guessing_game():
             st.session_state.max_lives = 5
             st.session_state.lives_left = st.session_state.max_lives
             st.session_state.secret_number = random.randint(1, 50)
+
+    # Prevent resetting 
+    if st.session_state.lives_left < 1:
+        st.session_state.game_active = st.session_state.update_game_active
     
     st.write(f"{st.session_state.max_lives} max lives")
     st.write(f"{st.session_state.guesses} guesses")
@@ -29,11 +33,12 @@ def number_guessing_game():
     if st.button("Submit Number") and st.session_state.game_active:
         if st.session_state.lives_left > 0:
             guess = int(user_guess)
+            st.write(f"{st.session_state.game_active}")
             st.session_state.guesses += 1
                     
             if guess == st.session_state.secret_number:
                 st.success("Congratulations, you got the number")
-                st.session_state.game_active = False
+                st.session_state.update_game_active = False
             
             else:
                 
@@ -44,7 +49,7 @@ def number_guessing_game():
                     
                 else:
                     st.error(f"Game Over. Try again. The correct answer was {st.session_state.secret_number}")
-                    st.session_state.game_active = False
+                    st.session_state.update_game_active = False
     else:
             st.warning("Please click on Game Start")
     
