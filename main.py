@@ -26,7 +26,7 @@ def number_guessing_game():
     st.write(f"{st.session_state.guesses} guesses")
     st.write(f"{st.session_state.game_active}")
     
-    user_guess = st.number_input("Guess the number between 1 and 50", step=1, min=1, max=50)
+    user_guess = st.number_input("Guess the number between 1 and 50", step=1, min_value=1, max_value=50)
     
     # Guessing the number
     if st.button("Submit Number", on_click=start_game):
