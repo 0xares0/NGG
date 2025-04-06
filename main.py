@@ -52,6 +52,12 @@ def number_guessing_game():
                 else:
                     st.error(f"Game Over. Try again. The correct answer was {st.session_state.secret_number}")
                     st.session_state.update_game_active = False
+    
+
+    # Ending game
+    if st.button("Reset game"):
+        st.session_state.game_active = False
+        st.session_state.secret_number = None
 
 
 
