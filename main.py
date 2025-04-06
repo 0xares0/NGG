@@ -8,7 +8,7 @@ def number_guessing_game():
     def init_the_game():
         if "game active" not in st.session_state:
             st.session_state.game_active = False
-            st.session_state.max_lives = None
+            st.session_state.max_lives = 5
             st.session_state.guesses = 0
         
     
