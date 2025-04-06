@@ -26,6 +26,26 @@ def number_guessing_game():
     st.write(f"{st.session_state.game_active}")
     
     user_guess = st.number_input("Guess the number between 1 and 50", step=1, min_value=1, max_value=50)
+
+    def continue_game():
+        if st.session_state.lives_left > 0:
+            guess = int(user_guess)
+            st.session_state.guesses += 1
+                    
+            if guess == st.session_state.secret_number:
+                st.success("Congratulations, you got the number")
+                st.session_state.game_active = False
+            
+            else:
+                st.session_state.lives_left -= 1
+            
+                if st.session_state.lives_left > 0:
+                    st.warning(f"Wrong number. Guess again. Lives left: {st.session_state.lives_left}")
+                    
+                else:
+                    st.error(f"Game Over. Try again. The correct answer was {st.session_state.secret_number}")
+                    st.session_state.game_active = False
+    
     
     # Guessing the number
     if st.button("Submit Number", on_click=continue_game):
@@ -52,26 +72,6 @@ def number_guessing_game():
     if st.button("Reset game"):
         st.session_state.game_active = False
         st.session_state.secret_number = None
-
-    def continue_game():
-        if st.session_state.lives_left > 0:
-            guess = int(user_guess)
-            st.session_state.guesses += 1
-                    
-            if guess == st.session_state.secret_number:
-                st.success("Congratulations, you got the number")
-                st.session_state.game_active = False
-            
-            else:
-                st.session_state.lives_left -= 1
-            
-                if st.session_state.lives_left > 0:
-                    st.warning(f"Wrong number. Guess again. Lives left: {st.session_state.lives_left}")
-                    
-                else:
-                    st.error(f"Game Over. Try again. The correct answer was {st.session_state.secret_number}")
-                    st.session_state.game_active = False
-    
 
 
 
