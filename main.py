@@ -27,6 +27,8 @@ def number_guessing_game():
     
     st.write(f"{st.session_state.max_lives} max lives")
     st.write(f"{st.session_state.guesses} guesses")
+    st.write(f"{st.session_state.game_active}")
+    st.write(f"{st.session_state.update_game_active}")
     
     user_guess = st.number_input("Guess the number between 1 and 50", step=1)
     
