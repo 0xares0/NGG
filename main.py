@@ -5,16 +5,14 @@ def number_guessing_game():
     st.title("Number guessing game")
 
     # Init the game
-    if "game active" not in st.session_state:
-        st.session_state.guesses = 0
-        st.session_state.game_active = False
-        st.session_state.lives_left = 0
-        st.session_state.max_lives = 5
+    if "game active" in st.session_state:
+        st.session_state.game_active = True
         
     
     # Game start
     if st.button("Game Start"):
         if not st.session_state.game_active:
+            st.session_state.guesses = 0
             st.session_state.game_active = True
             st.session_state.max_lives = 5
             st.session_state.lives_left = st.session_state.max_lives
