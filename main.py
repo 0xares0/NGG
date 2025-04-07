@@ -48,7 +48,6 @@ def number_guessing_game():
         else:
            st.session_state.current_player = 'player1' 
             
-    current =  st.session_state.current_player
 
     st.write(f"{st.session_state.players[st.session_state.current_player]['attempts']} attempts")
     
@@ -64,11 +63,11 @@ def number_guessing_game():
     # Guessing the number
     if st.button("Submit Number"):
         guess = int(user_guess)
-        st.session_state.players[current]['attempts'] += 1
+        st.session_state.players[st.session_state.current_player]['attempts'] += 1
                 
-        if guess == st.session_state.players[current]['secret_number']:
+        if guess == st.session_state.players[st.session_state.current_player]['secret_number']:
             st.success("Congratulations, you got the number")
-            st.session_state.players[current]['score'] += 1
+            st.session_state.players[st.session_state.current_player]['score'] += 1
             
         else:
             st.warning(f"Wrong number. {other_player}'s turn")
@@ -76,7 +75,7 @@ def number_guessing_game():
         
             
     # Hints
-    if st.session_state.game_active and abs(user_guess - st.session_state.players[current]['secret_number']) <= 5:
+    if st.session_state.game_active and abs(user_guess - st.session_state.players[st.session_state.current_player]['secret_number']) <= 5:
         st.warning(f"Getting hotter")
     
     else:
@@ -84,8 +83,8 @@ def number_guessing_game():
 
 
     if hint:
-            st.session_state.players[current]['attempts'] -= 1
-            st.write(f"The number squared is **{st.session_state.players[current]['secret_number'] ** 2}**")
+            st.session_state.players[st.session_state.current_player]['attempts'] -= 1
+            st.write(f"The number squared is **{st.session_state.players[st.session_state.current_player]['secret_number'] ** 2}**")
             st.write(f"You lose your turn")
             switch_player()
 
@@ -94,7 +93,7 @@ def number_guessing_game():
     # Reset game
     if st.button("Reset game"):
         st.session_state.game_active = False
-        st.session_state.secret_number = None
+        st.session_state.secret_number = 0
 
 
 
