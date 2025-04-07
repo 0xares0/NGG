@@ -65,7 +65,7 @@ def number_guessing_game():
     if hint:
         if st.session_state.lives_left > 1:
             st.session_state.lives_left -= 1
-            st.write(f"{st.session_state.secret_number} squared is **{st.session_state.secret_number ** 2}**")
+            st.write(f"The number squared is **{st.session_state.secret_number ** 2}**")
         
         else:
             st.warning(f"You're on your last life. No more hints")
