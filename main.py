@@ -2,29 +2,49 @@ import random
 import streamlit as st
 
 def number_guessing_game():
-    st.title("Number guessing game")
+    st.title("2-player Number guessing game")
 
+    #store player data
+    if "players" not in st.session_state:
+        st.session_state.players = {
+            'player1' : {
+                'attempts': 0,
+                'secret_number': None,
+                'score': 0,
+                'history': []
+            },
+
+            'player2': {
+                'attempts': 0,
+                'secret_number': None,
+                'score': 0,
+                'history': []
+            }
+        }
+    
     # Init the game
     if "game_active" not in st.session_state:
         st.session_state.game_active = False
-        st.session_state.max_lives = 5
-        st.session_state.guesses = 0
-        st.session_state.lives_left = 0
-        st.session_state.secret_number = 0
+    
+     # init players
+    if "current_player" not in st.session_state:
+        st.session.current_player = 'player1'
         
     start = st.button("Game Start")
     # Game start
     if start:
         if not st.session_state.game_active:
-            st.session_state.guesses = 0
             st.session_state.game_active = True
-            st.session_state.max_lives = 5
-            st.session_state.lives_left = st.session_state.max_lives
-            st.session_state.secret_number = random.randint(1, 50)
+            st.session_state.current_player
+
+    current = st.session_state.current_player
+    
+    # switch player
+    def switch_player():
+        current = 'player2' if current == 'player1' else 'player1' 
             
     
-    st.write(f"{st.session_state.max_lives} max lives")
-    st.write(f"{st.session_state.guesses} guesses")
+    st.write(f"{st.session_state.players[current]['attempts']} attempts")
     
     hint = st.button("Hint")
     
@@ -33,29 +53,20 @@ def number_guessing_game():
     
     # Guessing the number
     if st.button("Submit Number"):
-        if st.session_state.lives_left > 0:
-            guess = int(user_guess)
-            st.session_state.guesses += 1
+        guess = int(user_guess)
+        st.session_state.players[current]['attempts'] += 1
                 
-            if guess == st.session_state.secret_number:
-                st.success("Congratulations, you got the number")
-                st.session_state.game_active = False
+        if guess == st.session_state.players[current]['secret_number']:
+            st.success("Congratulations, you got the number")
+            st.session_state.players[current]['score'] += 1
             
-            else:
-                st.session_state.lives_left -= 1
+        else:
+            st.warning(f"Wrong number. {not current}'s turn")
+            switch_player()
         
-                if st.session_state.lives_left > 1:
-                    st.warning(f"Wrong number. Guess again. Lives left: {st.session_state.lives_left}")
-                
-                elif st.session_state.lives_left == 1:
-                    st.warning(f"Last Life. Check carefully")
-                    
-                else:
-                    st.error(f"Game Over. Try again. The correct answer was {st.session_state.secret_number}")
-                    st.session_state.game_active = False
-
+            
     # Hints
-    if st.session_state.game_active and abs(user_guess - st.session_state.secret_number) <= 5:
+    if st.session_state.game_active and abs(user_guess - st.session_state.players[current]['secret_number']) <= 5:
         st.warning(f"Getting hotter")
     
     else:
@@ -63,14 +74,11 @@ def number_guessing_game():
 
 
     if hint:
-        if st.session_state.lives_left > 1:
-            st.session_state.lives_left -= 1
+            st.session_state.players[current]['attempts'] -= 1
             st.write(f"The number squared is **{st.session_state.secret_number ** 2}**")
         
-        else:
-            st.warning(f"You're on your last life. No more hints")
-
-    # Ending game
+        
+    # Reset game
     if st.button("Reset game"):
         st.session_state.game_active = False
         st.session_state.secret_number = None
