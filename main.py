@@ -83,7 +83,7 @@ def number_guessing_game():
         st.warning(f"{st.session_state.players[st.session_state.current_player]} is getting hotter")
     
     else:
-        st.warning(f"Still cold")
+        st.warning(f"{st.session_state.players[st.session_state.current_player]} is still cold")
 
 
     if hint:
