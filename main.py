@@ -35,7 +35,7 @@ def number_guessing_game():
     
     submit = st.button("Submit Number", on_click=submit_guess)
     # Guessing the number
-    def submit_guess(continue_game):
+    def submit_guess():
         if st.session_state.lives_left > 0:
             guess = int(user_guess)
             st.session_state.guesses += 1
