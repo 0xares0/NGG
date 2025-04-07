@@ -28,7 +28,7 @@ def number_guessing_game():
     
      # init players
     if "current_player" not in st.session_state:
-        st.session.current_player = 'player1'
+        st.session_state.current_player = 'player1'
         
     start = st.button("Game Start")
     # Game start
