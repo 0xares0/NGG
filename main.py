@@ -50,6 +50,8 @@ def number_guessing_game():
             
 
     st.write(f"{st.session_state.current_player}: {st.session_state.players[st.session_state.current_player]['attempts']} attempts")
+    st.write(f"{st.session_state.players['player1']}: {st.session_state.players['player1']['score']}")
+    st.write(f"{st.session_state.players['player2']}: {st.session_state.players['player2']['score']}")
     
     hint = st.button("Hint")
 
@@ -73,7 +75,7 @@ def number_guessing_game():
         
             
     # Hints
-    if st.session_state.game_active and abs(user_guess - st.session_state.players[st.session_state.current_player]['secret_number']) <= 10:
+    if st.session_state.game_active and abs(user_guess - st.session_state.players[st.session_state.current_player]['secret_number']) <= 5:
         st.warning(f"Getting hotter")
     
     else:
