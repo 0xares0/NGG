@@ -81,7 +81,7 @@ def number_guessing_game():
 
 
     if hint:
-            st.session_state.players[st.session_state.current_player]['attempts'] -= 1
+            st.session_state.players[st.session_state.current_player]['attempts'] += 1
             st.write(f"The number squared is **{st.session_state.players[st.session_state.current_player]['secret_number'] ** 2}**")
             st.write(f"You lose your turn")
             switch_player()
@@ -90,8 +90,7 @@ def number_guessing_game():
         
     # Reset game
     if st.button("Reset game"):
-        st.session_state.game_active = False
-        st.session_state.secret_number = 0
+        for 
 
 
 
