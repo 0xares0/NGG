@@ -90,7 +90,8 @@ def number_guessing_game():
         
     # Reset game
     if st.button("Reset game"):
-        for 
+        for key in st.session_state.keys():
+            del st.session_state[key]
 
 
 
