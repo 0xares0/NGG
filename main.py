@@ -38,6 +38,9 @@ def number_guessing_game():
             st.session_state.current_player
             st.session_state.players['player1']['secret_number'] = random.randint(1, 50)
             st.session_state.players['player2']['secret_number'] = random.randint(1, 50)
+        else:
+            st.session_state.players['player1']['secret_number'] = random.randint(1, 50)
+            st.session_state.players['player2']['secret_number'] = random.randint(1, 50)
 
     
     # switch player
