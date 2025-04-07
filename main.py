@@ -36,25 +36,31 @@ def number_guessing_game():
         if not st.session_state.game_active:
             st.session_state.game_active = True
             st.session_state.current_player
+            st.session_state.players['player1']['secret_number'] = random.randint(1, 50)
+            st.session_state.players['player2']['secret_number'] = random.randint(51, 100)
 
-    current = st.session_state.current_player
     
     # switch player
     def switch_player():
-        if current == 'player1':
-            current = 'player2' 
+        if st.session_state.current_player == 'player1':
+            st.session_state.current_player = 'player2' 
 
         else:
-            'player1' 
+           st.session_state.current_player = 'player1' 
             
-    
+    current =  st.session_state.current_player
+
     st.write(f"{st.session_state.players[current]['attempts']} attempts")
     
     hint = st.button("Hint")
+
+    # Input guess
+    if current == 'player1':
+        user_guess = st.number_input("Guess the number between 1 and 50", step=1, min_value=1, max_value=50)
+    else:
+        user_guess = st.number_input("Guess the number between 51 and 100", step=1, min_value=51, max_value=100)
     
-    user_guess = st.number_input("Guess the number between 1 and 50", step=1, min_value=1, max_value=50)
-    
-    
+    other_player = 'player2' if current == 'player1' else 'player1'
     # Guessing the number
     if st.button("Submit Number"):
         guess = int(user_guess)
@@ -65,7 +71,7 @@ def number_guessing_game():
             st.session_state.players[current]['score'] += 1
             
         else:
-            st.warning(f"Wrong number. {not current}'s turn")
+            st.warning(f"Wrong number. {other_player}'s turn")
             switch_player()
         
             
