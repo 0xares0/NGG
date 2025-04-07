@@ -50,17 +50,17 @@ def number_guessing_game():
             
     current =  st.session_state.current_player
 
-    st.write(f"{st.session_state.players[current]['attempts']} attempts")
+    st.write(f"{st.session_state.players[st.session_state.current_player]['attempts']} attempts")
     
     hint = st.button("Hint")
 
     # Input guess
-    if current == 'player1':
+    if st.session_state.current_player == 'player1':
         user_guess = st.number_input("Guess the number between 1 and 50", step=1, min_value=1, max_value=50)
     else:
         user_guess = st.number_input("Guess the number between 51 and 100", step=1, min_value=51, max_value=100)
     
-    other_player = 'player2' if current == 'player1' else 'player1'
+    other_player = 'player2' if st.session_state.current_player == 'player1' else 'player1'
     # Guessing the number
     if st.button("Submit Number"):
         guess = int(user_guess)
