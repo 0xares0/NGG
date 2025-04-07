@@ -37,7 +37,7 @@ def number_guessing_game():
             st.session_state.game_active = True
             st.session_state.current_player
             st.session_state.players['player1']['secret_number'] = random.randint(1, 50)
-            st.session_state.players['player2']['secret_number'] = random.randint(51, 100)
+            st.session_state.players['player2']['secret_number'] = random.randint(1, 50)
 
     
     # switch player
@@ -49,7 +49,7 @@ def number_guessing_game():
            st.session_state.current_player = 'player1' 
             
 
-    st.write(f"{st.session_state.players[st.session_state.current_player]['attempts']} attempts")
+    st.write(f"{st.session_state.current_player}: {st.session_state.players[st.session_state.current_player]['attempts']} attempts")
     
     hint = st.button("Hint")
 
