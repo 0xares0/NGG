@@ -68,7 +68,7 @@ def number_guessing_game():
             st.session_state.players[st.session_state.current_player]['score'] += 1
             
         else:
-            st.warning(f"Wrong number. {other_player}'s turn")
+            st.warning(f"Wrong number. {st.session_state.players[st.session_state.current_player]}'s turn")
             switch_player()
         
             
