@@ -55,7 +55,7 @@ def number_guessing_game():
                     st.session_state.game_active = False
 
     # Hints
-    if abs(user_guess - st.session_state.secret_number) <= 5:
+    if st.session_state.game_active and abs(user_guess - st.session_state.secret_number) <= 5:
         st.warning(f"Getting hotter")
     
     else:
