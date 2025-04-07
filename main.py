@@ -12,9 +12,9 @@ def number_guessing_game():
         st.session_state.lives_left = 0
         st.session_state.secret_number = 0
         
-    
+    start = st.button("Game Start")
     # Game start
-    if st.button("Game Start"):
+    if start:
         if not st.session_state.game_active:
             st.session_state.guesses = 0
             st.session_state.game_active = True
@@ -33,22 +33,23 @@ def number_guessing_game():
         if st.session_state.lives_left > 0:
             st.session_state.game_active = True
     
-    
+    submit = st.button("Submit Number", on_click=submit_guess)
     # Guessing the number
-    if st.button("Submit Number", on_click=continue_game):
+    def submit_guess(continue_game):
         if st.session_state.lives_left > 0:
             guess = int(user_guess)
             st.session_state.guesses += 1
-                    
+                
             if guess == st.session_state.secret_number:
                 st.success("Congratulations, you got the number")
                 st.session_state.game_active = False
             
             else:
                 st.session_state.lives_left -= 1
-            
+        
                 if st.session_state.lives_left > 0:
                     st.warning(f"Wrong number. Guess again. Lives left: {st.session_state.lives_left}")
+                    st.session_state.game_active = True
                     
                 else:
                     st.error(f"Game Over. Try again. The correct answer was {st.session_state.secret_number}")
