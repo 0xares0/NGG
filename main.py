@@ -38,9 +38,6 @@ def number_guessing_game():
             st.session_state.current_player
             st.session_state.players['player1']['secret_number'] = random.randint(1, 50)
             st.session_state.players['player2']['secret_number'] = random.randint(1, 50)
-        else:
-            st.session_state.players['player1']['secret_number'] = random.randint(1, 50)
-            st.session_state.players['player2']['secret_number'] = random.randint(1, 50)
 
     
     # switch player
@@ -71,6 +68,7 @@ def number_guessing_game():
         if guess == st.session_state.players[st.session_state.current_player]['secret_number']:
             st.success("Congratulations, you got the number")
             st.session_state.players[st.session_state.current_player]['score'] += 1
+            st.session_state.game_active = False
             
         else:
             st.warning(f"Wrong number. {st.session_state.current_player}'s turn")
