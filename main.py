@@ -41,7 +41,11 @@ def number_guessing_game():
     
     # switch player
     def switch_player():
-        current = 'player2' if current == 'player1' else 'player1' 
+        if current == 'player1':
+            current = 'player2' 
+
+        else:
+            'player1' 
             
     
     st.write(f"{st.session_state.players[current]['attempts']} attempts")
