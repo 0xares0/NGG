@@ -25,17 +25,14 @@ def number_guessing_game():
     
     st.write(f"{st.session_state.max_lives} max lives")
     st.write(f"{st.session_state.guesses} guesses")
-    st.write(f"{st.session_state.game_active}")
+    
+    hint = st.button("Hint")
     
     user_guess = st.number_input("Guess the number between 1 and 50", step=1, min_value=1, max_value=50)
-
-    def continue_game():
-        if st.session_state.lives_left > 0:
-            st.session_state.game_active = True
     
     
     # Guessing the number
-    def submit_guess():
+    if st.button("Submit Number"):
         if st.session_state.lives_left > 0:
             guess = int(user_guess)
             st.session_state.guesses += 1
@@ -47,18 +44,31 @@ def number_guessing_game():
             else:
                 st.session_state.lives_left -= 1
         
-                if st.session_state.lives_left > 0:
+                if st.session_state.lives_left > 1:
                     st.warning(f"Wrong number. Guess again. Lives left: {st.session_state.lives_left}")
-                    st.session_state.game_active = True
+                
+                elif st.session_state.lives_left == 1:
+                    st.warning(f"Last Life. Check carefully")
                     
                 else:
                     st.error(f"Game Over. Try again. The correct answer was {st.session_state.secret_number}")
                     st.session_state.game_active = False
+
+    # Hints
+    if abs(user_guess - st.session_state.secret_number) <= 5:
+        st.warning(f"Getting hotter")
+    
+    else:
+        st.warning(f"Still cold")
+
+
+    if hint:
+        if st.session_state.lives_left > 1:
+            st.session_state.lives_left -= 1
+            st.write(f"{st.session_state.secret_number} squared is **{st.session_state.secret_number ** 2}**")
         
-        continue_game()
-    
-    submit = st.button("Submit Number", on_click=submit_guess)
-    
+        else:
+            st.warning(f"You're on your last life. No more hints")
 
     # Ending game
     if st.button("Reset game"):
